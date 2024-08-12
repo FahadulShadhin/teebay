@@ -4,7 +4,7 @@ const { createHandler } = require('graphql-http/lib/use/express');
 const { ruruHTML } = require('ruru/server');
 require('dotenv').config({ path: './.env' });
 const schema = require('./gql/schema.js');
-const root = require('./gql/resolvers.js');
+const root = require('./gql/resolvers/index.js');
 
 const PORT = process.env.PORT || 5000;
 
