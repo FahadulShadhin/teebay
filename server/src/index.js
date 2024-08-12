@@ -1,28 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-const { PrismaClient } = require('@prisma/client');
 const { createHandler } = require('graphql-http/lib/use/express');
-const { buildSchema } = require('graphql');
 const { ruruHTML } = require('ruru/server');
 require('dotenv').config({ path: './.env' });
+const schema = require('./gql/schema.js');
+const root = require('./gql/resolvers.js');
 
-const prisma = new PrismaClient();
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-const root = {
-	hello() {
-		return 'Hello world!';
-	},
-};
 
 app.all(
 	'/graphql',
@@ -37,5 +26,7 @@ app.get('/', (_req, res) => {
 	res.end(ruruHTML({ endpoint: '/graphql' }));
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+app.listen(PORT, () => {
+	console.log(`Server is running on port: ${PORT}`);
+	console.log(`Interact with GraphQL: http://localhost:${PORT}`);
+});
