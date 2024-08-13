@@ -1,5 +1,4 @@
 const { PrismaClient } = require('@prisma/client');
-const authMiddleware = require('../../middlewares/auth.middleware.js');
 const prisma = new PrismaClient();
 
 const productResolver = {

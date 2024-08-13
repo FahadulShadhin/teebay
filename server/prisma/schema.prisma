@@ -22,32 +22,65 @@ enum Category {
   TOYS
 }
 
+enum TransactionType {
+  BUY
+  RENT
+}
+
 model User {
-  id          Int       @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  email       String    @unique
-  address     String
-  phoneNumber String    @unique
-  password    String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  products    Product[]
+  id               Int           @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  email            String        @unique
+  address          String
+  phoneNumber      String        @unique
+  password         String
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  products         Product[]
+  transactionsFrom Transaction[] @relation("FromUser")
+  transactionsTo   Transaction[] @relation("ToUser")
 }
 
 model Product {
-  id            Int        @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   title         String
   categories    Category[]
   description   String
   purchasePrice Float
   rentPrice     Float
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  transactions  Transaction[]
 
   // Foreign key to User
   userId Int
   user   User @relation(fields: [userId], references: [id])
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@index([userId])
+}
+
+model Transaction {
+  id   Int             @id @default(autoincrement())
+  type TransactionType
+
+  // Foreign key to User that a is product baught or rented from 
+  fromUserId Int
+  fromUser   User @relation("FromUser", fields: [fromUserId], references: [id])
+
+  // Foreign key to User that a is product baught or rented to 
+  toUserId Int
+  toUser   User @relation("ToUser", fields: [toUserId], references: [id])
+
+  // Foreign key to Product
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([fromUserId])
+  @@index([toUserId])
+  @@index([productId])
 }

@@ -89,6 +89,27 @@ const userResolver = {
       throw new Error(`Error while fetching product. error: ${error.message}`);
     }
   },
+
+  userTransactions: async (_, context, __) => {
+    const { userId } = context.user;
+
+    try {
+      const transactions = await prisma.product.findMany({
+        where: { id: userId },
+        include: { transactions: true },
+      });
+
+      return transactions;
+    } catch (error) {
+      console.log(
+        `Error while fetching transactions for userId: ${userId}`,
+        error
+      );
+      throw new Error(
+        `Error while fetching transactions for userId: ${userId}`
+      );
+    }
+  },
 };
 
 module.exports = userResolver;

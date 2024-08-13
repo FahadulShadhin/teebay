@@ -11,6 +11,8 @@ const userTypeSchema = `
 		createdAt: String
 		updatedAt: String
 		products: [Product]
+		transactionsFrom: [Transaction!]
+  	transactionsTo: [Transaction!]
 	}
 `;
 
@@ -34,7 +36,25 @@ const productTypeSchema = `
     createdAt: String
     updatedAt: String
     user: User
+		transactions: [Transaction!]
   }
+`;
+
+const transactionTypeSchema = `
+	enum TransactionType {
+		BUY
+		RENT
+	}
+
+	type Transaction {
+		id: Int
+		type: TransactionType
+		fromUser: User
+		toUser: User
+		product: Product
+		createdAt: String
+		updatedAt: String
+	}
 `;
 
 const queryTypeSchema = `
@@ -44,6 +64,7 @@ const queryTypeSchema = `
     products: [Product]
     userProduct(id: Int!): Product
 		userProducts: [Product]
+		userTransactions(userId: Int!): [Transaction]
   }
 `;
 
@@ -101,6 +122,14 @@ const updateProductMutationSchema = `
 	): Product
 `;
 
+const createTransactionMutationSchema = `
+	createTransaction(
+		type: TransactionType!
+		fromUserId: Int!
+		productId: Int!
+	): Transaction
+`;
+
 const mutationTypeSchema = `
   type Mutation {
 		${registerUserMutationSchema}
@@ -109,12 +138,14 @@ const mutationTypeSchema = `
 		${updateUserMutationSchema}
 		${updateProductMutationSchema}
 		${deleteProductMutationSchema}
+		${createTransactionMutationSchema}
 	}
 `;
 
 const schema = buildSchema(`
 	${userTypeSchema}
 	${productTypeSchema}
+	${transactionTypeSchema}
   ${queryTypeSchema}
   ${mutationTypeSchema}
 `);
