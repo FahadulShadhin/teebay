@@ -79,6 +79,25 @@ const userResolver = {
       throw new Error('Error while updating user');
     }
   },
+
+  userProducts: async ({ userId }) => {
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: { products: true },
+      });
+      if (!user) {
+        throw new Error(`User with ID ${userId} not found`);
+      }
+      return user.products;
+    } catch (error) {
+      console.log(
+        `Error while fetching products for userId: ${userId}`,
+        error.message
+      );
+      throw new Error(`Error while fetching products for userId: ${userId}`);
+    }
+  },
 };
 
 module.exports = userResolver;

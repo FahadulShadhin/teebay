@@ -14,11 +14,20 @@ const userTypeSchema = `
 	}
 `;
 
-const ProductTypeSchema = `
+const productTypeSchema = `
+	enum Category {
+		ELECTRONICS
+    FURNITURE
+    HOME_APPLIANCES
+    SPORTING_GOODS
+    OUTDOOR
+    TOYS
+	}
+
 	type Product {
     id: Int
     title: String
-    categories: [String]
+    categories: [Category]
     description: String
     purchasePrice: Float
     rentPrice: Float
@@ -34,6 +43,7 @@ const queryTypeSchema = `
     user(id: Int!): User
     products: [Product]
     product(id: Int!): Product
+		userProducts(userId: Int!): [Product]
   }
 `;
 
@@ -52,7 +62,7 @@ const createUserMutationSchema = `
 const createProductMutationSchema = `
 	createProduct(
 		title: String!,
-		categories: [String!]!,
+		categories: [Category!]!,
 		description: String!,
 		purchasePrice: Float!,
 		rentPrice: Float!,
@@ -79,7 +89,7 @@ const updateProductMutationSchema = `
 	updateProduct(
 		id: Int!,
 		title: String,
-		categories: [String],
+		categories: [Category],
 		description: String,
 		purchasePrice: Float,
 		rentPrice: Float
@@ -88,17 +98,17 @@ const updateProductMutationSchema = `
 
 const mutationTypeSchema = `
   type Mutation {
-      ${createUserMutationSchema}
-      ${createProductMutationSchema}
-      ${updateUserMutationSchema}
-      ${updateProductMutationSchema}
-      ${deleteProductMutationSchema}
-    }
+		${createUserMutationSchema}
+		${createProductMutationSchema}
+		${updateUserMutationSchema}
+		${updateProductMutationSchema}
+		${deleteProductMutationSchema}
+	}
 `;
 
 const schema = buildSchema(`
 	${userTypeSchema}
-	${ProductTypeSchema}
+	${productTypeSchema}
   ${queryTypeSchema}
   ${mutationTypeSchema}
 `);
