@@ -25,47 +25,16 @@ const userResolver = {
     }
   },
 
-  createUser: async ({
-    firstName,
-    lastName,
-    email,
-    address,
-    phoneNumber,
-    password,
-    confirmPassword,
-  }) => {
-    if (password !== confirmPassword) {
-      throw new Error('Passwords do not match');
-    }
-    try {
-      return await prisma.user.create({
-        data: {
-          firstName,
-          lastName,
-          email,
-          address,
-          phoneNumber,
-          password,
-          confirmPassword,
-        },
-      });
-    } catch (error) {
-      console.log('Error while creating user', error);
-      throw new Error('Error while creating User');
-    }
-  },
+  updateUser: async (
+    { firstName, lastName, email, address, phoneNumber },
+    context,
+    _
+  ) => {
+    const { userId } = context.user;
 
-  updateUser: async ({
-    id,
-    firstName,
-    lastName,
-    email,
-    address,
-    phoneNumber,
-  }) => {
     try {
       return await prisma.user.update({
-        where: { id: id },
+        where: { id: userId },
         data: {
           firstName,
           lastName,
@@ -80,22 +49,44 @@ const userResolver = {
     }
   },
 
-  userProducts: async ({ userId }) => {
+  userProducts: async (_, context, __) => {
+    const userId = context.user.userId;
+
     try {
       const user = await prisma.user.findUnique({
         where: { id: userId },
         include: { products: true },
       });
+
       if (!user) {
         throw new Error(`User with ID ${userId} not found`);
       }
+
       return user.products;
     } catch (error) {
-      console.log(
-        `Error while fetching products for userId: ${userId}`,
-        error.message
-      );
+      console.log(`Error while fetching products for userId: ${userId}`, error);
       throw new Error(`Error while fetching products for userId: ${userId}`);
+    }
+  },
+
+  userProduct: async ({ id }, context, _) => {
+    const { userId } = context.user;
+
+    try {
+      const product = await prisma.product.findUnique({
+        where: { id: id },
+        include: { user: true },
+      });
+      if (!product) throw new Error('Product not found');
+
+      if (product.user.id !== userId) {
+        throw new Error('Unauthorized access');
+      }
+
+      return product;
+    } catch (error) {
+      console.log('Error while fetching product', error);
+      throw new Error(`Error while fetching product. error: ${error.message}`);
     }
   },
 };

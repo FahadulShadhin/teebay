@@ -42,13 +42,13 @@ const queryTypeSchema = `
     users: [User]
     user(id: Int!): User
     products: [Product]
-    product(id: Int!): Product
-		userProducts(userId: Int!): [Product]
+    userProduct(id: Int!): Product
+		userProducts: [Product]
   }
 `;
 
-const createUserMutationSchema = `
-	createUser(
+const registerUserMutationSchema = `
+	signup(
 		firstName: String!,
 		lastName: String!,
 		email: String!,
@@ -56,7 +56,14 @@ const createUserMutationSchema = `
 		phoneNumber: String!,
 		password: String!,
 		confirmPassword: String!
-	): User
+	): String
+`;
+
+const loginUserMutationSchema = `
+	login(
+		email: String!
+		password: String!
+	): String
 `;
 
 const createProductMutationSchema = `
@@ -66,13 +73,11 @@ const createProductMutationSchema = `
 		description: String!,
 		purchasePrice: Float!,
 		rentPrice: Float!,
-		userId: Int!
 	): Product
 `;
 
 const updateUserMutationSchema = `
 	updateUser(
-		id: Int!,
 		firstName: String,
 		lastName: String,
 		email: String,
@@ -98,7 +103,8 @@ const updateProductMutationSchema = `
 
 const mutationTypeSchema = `
   type Mutation {
-		${createUserMutationSchema}
+		${registerUserMutationSchema}
+		${loginUserMutationSchema}
 		${createProductMutationSchema}
 		${updateUserMutationSchema}
 		${updateProductMutationSchema}

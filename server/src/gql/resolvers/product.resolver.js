@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const authMiddleware = require('../../middlewares/auth.middleware.js');
 const prisma = new PrismaClient();
 
 const productResolver = {
@@ -25,14 +26,12 @@ const productResolver = {
     }
   },
 
-  createProduct: async ({
-    title,
-    categories,
-    description,
-    purchasePrice,
-    rentPrice,
-    userId,
-  }) => {
+  createProduct: async (
+    { title, categories, description, purchasePrice, rentPrice },
+    context,
+    _
+  ) => {
+    const { userId } = context.user;
     try {
       return await prisma.product.create({
         data: {
@@ -51,14 +50,23 @@ const productResolver = {
     }
   },
 
-  updateProduct: async ({
-    id,
-    title,
-    categories,
-    description,
-    purchasePrice,
-    rentPrice,
-  }) => {
+  updateProduct: async (
+    { id, title, categories, description, purchasePrice, rentPrice },
+    context,
+    _
+  ) => {
+    const { userId } = context.user;
+
+    const product = await prisma.product.findUnique({
+      where: { id: id },
+      include: { user: true },
+    });
+
+    const ownerId = product?.user?.id;
+    if (!ownerId || userId !== ownerId) {
+      throw new Error('Unauthorized to update this product');
+    }
+
     try {
       return await prisma.product.update({
         where: { id: id },
@@ -76,7 +84,19 @@ const productResolver = {
     }
   },
 
-  deleteProduct: async ({ id }) => {
+  deleteProduct: async ({ id }, context, _) => {
+    const { userId } = context.user;
+
+    const product = await prisma.product.findUnique({
+      where: { id: id },
+      include: { user: true },
+    });
+
+    const ownerId = product?.user?.id;
+    if (!ownerId || userId !== ownerId) {
+      throw new Error('Unauthorized to update this product');
+    }
+
     try {
       return await prisma.product.delete({
         where: { id: id },
