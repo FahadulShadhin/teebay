@@ -53,16 +53,12 @@ const userResolver = {
     const userId = context.user.userId;
 
     try {
-      const user = await prisma.user.findUnique({
-        where: { id: userId },
-        include: { products: true },
+      const products = await prisma.product.findMany({
+        where: { userId: userId },
+        orderBy: { createdAt: 'desc' },
       });
 
-      if (!user) {
-        throw new Error(`User with ID ${userId} not found`);
-      }
-
-      return user.products;
+      return products;
     } catch (error) {
       console.log(`Error while fetching products for userId: ${userId}`, error);
       throw new Error(`Error while fetching products for userId: ${userId}`);
@@ -94,9 +90,18 @@ const userResolver = {
     const { userId } = context.user;
 
     try {
-      const transactions = await prisma.product.findMany({
-        where: { id: userId },
-        include: { transactions: true },
+      const transactions = await prisma.transaction.findMany({
+        where: {
+          OR: [{ fromUserId: userId }, { toUserId: userId }],
+        },
+        include: {
+          fromUser: true,
+          toUser: true,
+          product: true,
+        },
+        orderBy: {
+          createdAt: 'desc',
+        },
       });
 
       return transactions;

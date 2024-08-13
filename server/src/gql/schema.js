@@ -64,7 +64,7 @@ const queryTypeSchema = `
     products: [Product]
     userProduct(id: Int!): Product
 		userProducts: [Product]
-		userTransactions(userId: Int!): [Transaction]
+		userTransactions: [Transaction]
   }
 `;
 

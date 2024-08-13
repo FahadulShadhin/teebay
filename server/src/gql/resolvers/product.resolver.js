@@ -6,6 +6,7 @@ const productResolver = {
     try {
       return await prisma.product.findMany({
         include: { user: true },
+        orderBy: { createdAt: 'desc' },
       });
     } catch (error) {
       console.log('Error while fetching products', error);
