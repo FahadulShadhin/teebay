@@ -94,7 +94,7 @@ const productResolver = {
 
     const ownerId = product?.user?.id;
     if (!ownerId || userId !== ownerId) {
-      throw new Error('Unauthorized to update this product');
+      throw new Error('Unauthorized to delete this product');
     }
 
     try {

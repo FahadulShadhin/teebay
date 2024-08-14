@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authMiddleware = async (authHeader) => {
+const authMiddleware = (authHeader) => {
   try {
     if (authHeader) {
       const token = authHeader.replace('Bearer ', '');

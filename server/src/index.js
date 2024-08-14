@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// endpoints without auth --> user signup and login
+// endpoint without auth --> user signup and login
 app.use(
   '/graphql/auth',
   createHandler({
@@ -23,7 +23,7 @@ app.use(
   })
 );
 
-// endpoints with auth required
+// endpoint with auth required
 app.use(
   '/graphql',
   createHandler({
@@ -31,9 +31,7 @@ app.use(
     rootValue: root,
     context: async (req) => {
       try {
-        const { userId, email } = await authMiddleware(
-          req.headers.authorization
-        );
+        const { userId, email } = authMiddleware(req.headers.authorization);
         return { user: { userId, email } };
       } catch (error) {
         return { user: {} };
