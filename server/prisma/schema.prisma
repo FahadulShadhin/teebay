@@ -27,6 +27,12 @@ enum TransactionType {
   RENT
 }
 
+enum RentPriceType {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
 model User {
   id               Int           @id @default(autoincrement())
   firstName        String
@@ -49,6 +55,7 @@ model Product {
   description   String
   purchasePrice Float
   rentPrice     Float
+  rentPriceType RentPriceType
   transactions  Transaction[]
 
   // Foreign key to User
@@ -62,8 +69,10 @@ model Product {
 }
 
 model Transaction {
-  id   Int             @id @default(autoincrement())
-  type TransactionType
+  id            Int             @id @default(autoincrement())
+  type          TransactionType
+  rentStartDate DateTime? // optional only for renting
+  rentEndDate   DateTime? // optional only for renting
 
   // Foreign key to User that a is product baught or rented from 
   fromUserId Int

@@ -27,7 +27,7 @@ const productResolver = {
   },
 
   createProduct: async (
-    { title, categories, description, purchasePrice, rentPrice },
+    { title, categories, description, purchasePrice, rentPrice, rentPriceType },
     context,
     _
   ) => {
@@ -40,12 +40,13 @@ const productResolver = {
           description,
           purchasePrice,
           rentPrice,
+          rentPriceType,
           user: { connect: { id: userId } },
         },
         include: { user: true },
       });
     } catch (error) {
-      console.log('Error while creating product');
+      console.log('Error while creating product', error);
       throw new Error('Error while creating product');
     }
   },

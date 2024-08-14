@@ -2,15 +2,19 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const transactionResolver = {
-  createTransaction: async ({ type, fromUserId, productId }, context, _) => {
+  createTransaction: async (
+    { type, productId, rentStartDate, rentEndDate },
+    context,
+    _
+  ) => {
     const { userId } = context.user;
 
-    const ownProduct = await prisma.product.findUnique({
+    const product = await prisma.product.findUnique({
       where: { id: productId },
       include: { user: true },
     });
 
-    if (userId === fromUserId || ownProduct?.user?.id === userId) {
+    if (product?.user?.id === userId) {
       throw new Error(`Can't buy or rent own product`);
     }
 
@@ -18,9 +22,11 @@ const transactionResolver = {
       const newTransaction = await prisma.transaction.create({
         data: {
           type,
-          fromUser: { connect: { id: fromUserId } },
+          fromUser: { connect: { id: product?.user?.id } },
           toUser: { connect: { id: userId } },
           product: { connect: { id: productId } },
+          rentStartDate,
+          rentEndDate,
         },
       });
 

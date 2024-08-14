@@ -26,6 +26,12 @@ const productTypeSchema = `
     TOYS
 	}
 
+	enum RentPriceType {
+		DAILY
+		WEEKLY
+		MONTHLY
+	}
+
 	type Product {
     id: Int
     title: String
@@ -33,6 +39,7 @@ const productTypeSchema = `
     description: String
     purchasePrice: Float
     rentPrice: Float
+		rentPriceType: RentPriceType
     createdAt: String
     updatedAt: String
     user: User
@@ -49,6 +56,8 @@ const transactionTypeSchema = `
 	type Transaction {
 		id: Int
 		type: TransactionType
+		rentStartDate: String
+		rentEndDate: String
 		fromUser: User
 		toUser: User
 		product: Product
@@ -89,11 +98,12 @@ const loginUserMutationSchema = `
 
 const createProductMutationSchema = `
 	createProduct(
-		title: String!,
-		categories: [Category!]!,
-		description: String!,
-		purchasePrice: Float!,
-		rentPrice: Float!,
+		title: String!
+		categories: [Category!]!
+		description: String!
+		purchasePrice: Float!
+		rentPrice: Float!
+		rentPriceType: RentPriceType!
 	): Product
 `;
 
@@ -118,15 +128,17 @@ const updateProductMutationSchema = `
 		categories: [Category],
 		description: String,
 		purchasePrice: Float,
-		rentPrice: Float
+		rentPrice: Float,
+		rentPriceType: RentPriceType
 	): Product
 `;
 
 const createTransactionMutationSchema = `
 	createTransaction(
 		type: TransactionType!
-		fromUserId: Int!
 		productId: Int!
+		rentStartDate: String
+		rentEndDate: String
 	): Transaction
 `;
 
