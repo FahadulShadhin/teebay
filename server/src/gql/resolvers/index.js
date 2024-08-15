@@ -7,6 +7,7 @@ const root = {
   ...userResolver,
   ...productResolver,
   ...transactionResolver,
+  ...authResolver,
 };
 
-module.exports = { authResolver, root };
+module.exports = { root };
