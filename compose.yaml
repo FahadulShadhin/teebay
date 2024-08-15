@@ -1,4 +1,15 @@
 services:
+  client:
+    container_name: client
+    image: client
+    build:
+      context: ./client
+      dockerfile: client.dockerfile
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - server
   server:
     container_name: server
     image: server
