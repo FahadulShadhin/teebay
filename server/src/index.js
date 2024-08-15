@@ -35,11 +35,6 @@ app.get('/', (_req, res) => {
   res.end(ruruHTML({ endpoint: '/graphql' }));
 });
 
-app.get('/auth', (_req, res) => {
-  res.type('html');
-  res.end(ruruHTML({ endpoint: '/graphql/auth' }));
-});
-
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
   console.log(`Interact with GraphQL: http://localhost:${PORT}`);
