@@ -16,6 +16,13 @@ const userTypeSchema = `
 	}
 `;
 
+const authTypeSchema = `
+	type Auth {
+		token: String
+		user: User
+	}
+`;
+
 const productTypeSchema = `
 	enum Category {
 		ELECTRONICS
@@ -86,14 +93,14 @@ const registerUserMutationSchema = `
 		phoneNumber: String!,
 		password: String!,
 		confirmPassword: String!
-	): String
+	): Auth
 `;
 
 const loginUserMutationSchema = `
 	login(
 		email: String!
 		password: String!
-	): String
+	): Auth
 `;
 
 const createProductMutationSchema = `
@@ -157,6 +164,7 @@ const mutationTypeSchema = `
 const schema = buildSchema(`
 	${userTypeSchema}
 	${productTypeSchema}
+	${authTypeSchema}
 	${transactionTypeSchema}
   ${queryTypeSchema}
   ${mutationTypeSchema}

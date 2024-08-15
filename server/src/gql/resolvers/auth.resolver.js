@@ -39,7 +39,7 @@ const authResolver = {
         }
       );
 
-      return token;
+      return { token, user: newUser };
     } catch (error) {
       console.log('Signup failed', error);
       throw new Error(`Signup failed: ${error.message}`);
@@ -67,7 +67,7 @@ const authResolver = {
         }
       );
 
-      return token;
+      return { token, user };
     } catch (error) {
       console.log('Login failed', error);
       throw new Error(`Login failed: ${error.message}`);

@@ -1,5 +1,7 @@
 import './App.css';
-import Users from './components/Users';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Auth from './pages/Auth.page';
+import Index from './pages/Index';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -11,7 +13,12 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Users />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Auth />} />
+            <Route path="/home" element={<Index />} />
+          </Routes>
+        </Router>
       </ApolloProvider>
     </>
   );
