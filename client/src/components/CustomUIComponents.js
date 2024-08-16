@@ -30,4 +30,12 @@ const CustomButton = styled(Button)(() => ({
   },
 }));
 
-export { CustomTextField, CustomButton };
+const WarningButton = styled(Button)(() => ({
+  color: '#ffffff',
+  backgroundColor: '#d2445b',
+  '&:hover': {
+    backgroundColor: '#d2445b',
+  },
+}));
+
+export { CustomTextField, CustomButton, WarningButton };
