@@ -1,0 +1,14 @@
+.main-page-container {
+  padding: 0 4rem;
+}
+
+.main-page-navigator-container {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-page-button-group {
+  display: flex;
+  gap: 20px;
+}

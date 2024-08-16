@@ -7,11 +7,16 @@ const Logout = () => {
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('isAllProducts');
     navigate('/');
   };
   return (
     <div>
-      <WarningButton variant="contained" onClick={handleLogout}>
+      <WarningButton
+        className="button"
+        variant="contained"
+        onClick={handleLogout}
+      >
         Logout
       </WarningButton>
     </div>

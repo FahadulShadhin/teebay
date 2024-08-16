@@ -1,8 +1,8 @@
+import './assets/authComponent.style.css';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../gql/mutations/userMutations';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import './assets/authComponent.style.css';
 import { CustomTextField, CustomButton } from './CustomUIComponents';
 import CircularProgress from '@mui/material/CircularProgress';
 
