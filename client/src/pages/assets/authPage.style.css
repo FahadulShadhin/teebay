@@ -1,0 +1,15 @@
+.auth-page-container {
+  height: 100vh;
+  margin-top: -1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem;
+  padding: 1rem;
+}

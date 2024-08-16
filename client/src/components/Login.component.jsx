@@ -39,7 +39,6 @@ const Login = ({ onSwitch }) => {
 
   return (
     <div className="form-container">
-      <h2 className="title">Sign in</h2>
       <form
         className="form"
         component="form"

@@ -47,7 +47,6 @@ const Signup = ({ onSwitch }) => {
 
   return (
     <div className="form-container">
-      <h2 className="title">Sign up</h2>
       <form
         className="form"
         component="form"
