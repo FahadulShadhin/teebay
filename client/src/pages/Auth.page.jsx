@@ -13,7 +13,7 @@ const Auth = () => {
       ) : (
         <h2 className="title">Sign up</h2>
       )}
-      
+
       {isLogin ? (
         <Login onSwitch={() => setIsLogin(false)} />
       ) : (

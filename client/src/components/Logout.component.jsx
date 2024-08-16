@@ -8,17 +8,14 @@ const Logout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
     navigate('/');
-  }
+  };
   return (
     <div>
-      <WarningButton
-        variant="contained"
-        onClick={handleLogout}
-      >
+      <WarningButton variant="contained" onClick={handleLogout}>
         Logout
       </WarningButton>
     </div>
-  )
-}
+  );
+};
 
-export default Logout
+export default Logout;
