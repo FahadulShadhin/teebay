@@ -25,7 +25,7 @@ const MyProducts = () => {
 
   return (
     <div className="products-list-container">
-      <h1 className="title">All Products</h1>
+      <h1 className="title">My Products</h1>
 
       {loading ? (
         <p>Loading...</p>
@@ -66,9 +66,12 @@ const MyProducts = () => {
             </div>
           ))}
 
-          <CustomButton className="button add-product-btn">
-        Add product
-      </CustomButton>
+          <CustomButton
+            className="button add-product-btn"
+            onClick={() => navigate('/create-product')}
+          >
+            Add product
+          </CustomButton>
         </div>
       )}
     </div>
