@@ -22,7 +22,6 @@ const Index = () => {
           <Button
             className="button"
             variant="outlined"
-            // disableElevation
             disabled={isAllProducts}
             onClick={() => setIsAllProducts(true)}
           >
@@ -32,7 +31,6 @@ const Index = () => {
             className="button"
             disabled={!isAllProducts}
             variant="outlined"
-            // disableElevation
             onClick={() => setIsAllProducts(false)}
           >
             My Products
