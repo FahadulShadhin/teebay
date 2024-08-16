@@ -19,11 +19,6 @@ span {
   font-size: 1.2rem;
 }
 
-.link {
-  color: #3c90dc;
-  cursor: pointer;
-}
-
 .error-msg {
   color: #aa4f4f;
 }

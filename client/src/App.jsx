@@ -2,13 +2,10 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth.page';
 import Index from './pages/Index.page';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import ProductDetails from './pages/ProductDetails.page';
+import { ApolloProvider } from '@apollo/client';
 import ProtectedRoute from './components/HOC/ProtectedRoute.component';
-
-const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
-  cache: new InMemoryCache(),
-});
+import { client } from './gql/apolloClient';
 
 function App() {
   return (
@@ -17,9 +14,9 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Auth />} />
-
             <Route element={<ProtectedRoute />}>
               <Route path="/home" element={<Index />} />
+              <Route path="/product-details/:id" element={<ProductDetails />} />
             </Route>
           </Routes>
         </Router>

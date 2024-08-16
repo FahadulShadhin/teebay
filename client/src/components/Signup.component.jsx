@@ -18,7 +18,6 @@ const Signup = ({ onSwitch }) => {
   const [signup, { loading, error }] = useMutation(SIGNUP);
 
   const onSubmit = async (data) => {
-    console.log(data);
     try {
       const response = await signup({
         variables: {
