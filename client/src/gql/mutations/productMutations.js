@@ -29,3 +29,19 @@ export const CREATE_PRODUCT = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation DeleteProduct($id: Int!) {
+    deleteProduct(id: $id) {
+      title
+      description
+      categories
+      purchasePrice
+      rentPrice
+      rentPriceType
+      user {
+        email
+      }
+    }
+  }
+`;

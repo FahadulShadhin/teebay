@@ -1,7 +1,8 @@
 import './assets/productComponent.style.css';
-import { useQuery } from '@apollo/client';
-import { useEffect } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { useEffect, useState } from 'react';
 import { GET_MY_PRODUCTS } from '../gql/queries/productQueries';
+import { DELETE_PRODUCT } from '../gql/mutations/productMutations';
 import {
   formatProductCategory,
   truncateProductDescription,
@@ -9,6 +10,7 @@ import {
 } from '../utils';
 import DeleteButton from './deleteButton.component';
 import { CustomButton } from './CustomUIComponents';
+import ConfirmProductDeleteModal from './ConfirmProductDelete.component';
 import { useNavigate } from 'react-router-dom';
 
 const MyProducts = () => {
@@ -16,12 +18,34 @@ const MyProducts = () => {
   const { loading, error, data, refetch } = useQuery(GET_MY_PRODUCTS, {
     fetchPolicy: 'network-only',
   });
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     refetch();
   }, [refetch]);
 
   if (error) return <p>Something went wrong!</p>;
+
+  const handleDeleteButtonClick = (productId) => {
+    setSelectedProductId(productId);
+    setModalOpen(true);
+  };
+
+  const handleProductDelete = async () => {
+    try {
+      const response = await deleteProduct({
+        variables: {
+          id: selectedProductId,
+        },
+        refetchQueries: [{ query: GET_MY_PRODUCTS }],
+      });
+      console.table(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <div className="products-list-container">
@@ -35,7 +59,9 @@ const MyProducts = () => {
             <div key={`all_products_${product.id}`} className="product-item">
               <div className="product-heading-group">
                 <h2>{product.title}</h2>
-                <DeleteButton />
+                <DeleteButton
+                  onClick={() => handleDeleteButtonClick(product.id)}
+                />
               </div>
               <div className="product-categories-container">
                 <span className="product-category">Categories: </span>
@@ -74,6 +100,12 @@ const MyProducts = () => {
           </CustomButton>
         </div>
       )}
+
+      <ConfirmProductDeleteModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onConfirm={handleProductDelete}
+      />
     </div>
   );
 };
