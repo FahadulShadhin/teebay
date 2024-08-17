@@ -11,8 +11,8 @@ const Auth = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
-    if (token) navigate('/home')
-  }, [navigate])
+    if (token) navigate('/home');
+  }, [navigate]);
 
   return (
     <div className="auth-page-container">

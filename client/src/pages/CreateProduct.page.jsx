@@ -99,7 +99,6 @@ const CreateProduct = () => {
               }}
               render={({ field }) => (
                 <TextField
-                  label="Title"
                   variant="outlined"
                   fullWidth
                   {...field}
@@ -134,7 +133,6 @@ const CreateProduct = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  label="Categories"
                   multiple
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
@@ -203,7 +201,6 @@ const CreateProduct = () => {
               control={control}
               render={({ field }) => (
                 <TextField
-                  label="Description"
                   variant="outlined"
                   fullWidth
                   multiline
@@ -249,7 +246,7 @@ const CreateProduct = () => {
               control={control}
               render={({ field }) => (
                 <TextField
-                  label="Price"
+                  placeholder='Purchase price'
                   type="number"
                   variant="outlined"
                   fullWidth
@@ -266,7 +263,7 @@ const CreateProduct = () => {
                 control={control}
                 render={({ field }) => (
                   <TextField
-                    label="Rent Price"
+                    placeholder='Rent price'
                     type="number"
                     variant="outlined"
                     fullWidth
@@ -281,7 +278,6 @@ const CreateProduct = () => {
                 control={control}
                 render={({ field }) => (
                   <Select
-                    label="Rent Type"
                     value={field.value}
                     onChange={(e) => field.onChange(e.target.value)}
                     variant="outlined"

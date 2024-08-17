@@ -55,7 +55,7 @@ form {
 
 .input-group-container {
   display: flex;
-  gap: 1rem;
+  gap: 4rem;
 }
 
 .sub-title {
@@ -86,4 +86,31 @@ form {
 .product-details-price,
 .product-owner {
   color: #7f8d9b;
+}
+
+.edit-product-form-container {
+  border: none;
+  width: 50%;
+}
+
+.grouped {
+  margin-bottom: 0;
+}
+
+.price-container {
+  width: 250px;
+}
+
+.input-inner-group-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.subtitle {
+  margin-bottom: 0.5rem;
+}
+
+.edit-button {
+  margin-top: 2rem;
+  align-self: flex-end;
 }

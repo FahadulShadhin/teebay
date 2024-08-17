@@ -58,3 +58,10 @@ export const formatRentTypeFormData = (rentType) => {
   if (rentType === 'per month') return 'MONTHLY';
   return rentType;
 };
+
+export const formatRentType = (rentTypeGQLResponse) => {
+  if (rentTypeGQLResponse === 'DAILY') return 'per day';
+  if (rentTypeGQLResponse === 'WEEKLY') return 'per week';
+  if (rentTypeGQLResponse === 'MONTHLY') return 'per month';
+  return rentTypeGQLResponse;
+};

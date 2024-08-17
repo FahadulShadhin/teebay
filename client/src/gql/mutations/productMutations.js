@@ -30,6 +30,36 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
+export const UPDATE_PRODUCT = gql`
+  mutation UpdateProduct(
+    $id: Int!
+    $title: String
+    $categories: [Category]
+    $description: String
+    $purchasePrice: Float
+    $rentPrice: Float
+    $rentPriceType: RentPriceType
+  ) {
+    updateProduct(
+      id: $id
+      title: $title
+      categories: $categories
+      description: $description
+      purchasePrice: $purchasePrice
+      rentPrice: $rentPrice
+      rentPriceType: $rentPriceType
+    ) {
+      id
+      title
+      categories
+      description
+      purchasePrice
+      rentPrice
+      rentPriceType
+    }
+  }
+`;
+
 export const DELETE_PRODUCT = gql`
   mutation DeleteProduct($id: Int!) {
     deleteProduct(id: $id) {

@@ -103,8 +103,8 @@ const productResolver = {
         where: { id: id },
       });
     } catch (error) {
-      console.log('Error while deleting product');
-      throw new Error('Error while deleting product');
+      console.log('Error while deleting product', error);
+      throw new Error(`Error while deleting product: ${error.message}`);
     }
   },
 };
