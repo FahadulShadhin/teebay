@@ -33,10 +33,7 @@ const authResolver = {
 
       const token = jwt.sign(
         { userId: newUser.id, email: newUser.email },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: '1h',
-        }
+        process.env.JWT_SECRET
       );
 
       return { token, user: newUser };
@@ -61,10 +58,7 @@ const authResolver = {
 
       const token = jwt.sign(
         { userId: user.id, email: user.email },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: '1h',
-        }
+        process.env.JWT_SECRET
       );
 
       return { token, user };

@@ -78,6 +78,7 @@ const queryTypeSchema = `
     users: [User]
     user(id: Int!): User
     products: [Product]
+		product(id: Int!): Product
     userProduct(id: Int!): Product
 		userProducts: [Product]
 		userTransactions: [Transaction]

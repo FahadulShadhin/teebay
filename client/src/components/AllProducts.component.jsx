@@ -30,7 +30,11 @@ const AllProducts = () => {
       ) : (
         <div className="products-list">
           {data.products.map((product) => (
-            <div key={`all_products_${product.id}`} className="product-item">
+            <div
+              key={`all_products_${product.id}`}
+              className="product-item"
+              onClick={() => navigate(`/product-details/${product.id}`)}
+            >
               <h2>{product.title}</h2>
               <div className="product-categories-container">
                 <span className="product-category">Categories: </span>

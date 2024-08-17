@@ -1,6 +1,6 @@
 import './assets/productComponent.style.css';
 import { useQuery, useMutation } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GET_MY_PRODUCTS } from '../gql/queries/productQueries';
 import { DELETE_PRODUCT } from '../gql/mutations/productMutations';
 import {
@@ -10,25 +10,22 @@ import {
 } from '../utils';
 import DeleteButton from './deleteButton.component';
 import { CustomButton } from './CustomUIComponents';
-import ConfirmProductDeleteModal from './ConfirmProductDelete.component';
+import WarningModal from './WarningModal.component';
 import { useNavigate } from 'react-router-dom';
 
 const MyProducts = () => {
   const navigate = useNavigate();
-  const { loading, error, data, refetch } = useQuery(GET_MY_PRODUCTS, {
+  const { loading, error, data } = useQuery(GET_MY_PRODUCTS, {
     fetchPolicy: 'network-only',
   });
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
   if (error) return <p>Something went wrong!</p>;
 
-  const handleDeleteButtonClick = (productId) => {
+  const handleDeleteButtonClick = (event, productId) => {
+    event.stopPropagation();
     setSelectedProductId(productId);
     setModalOpen(true);
   };
@@ -56,11 +53,17 @@ const MyProducts = () => {
       ) : (
         <div className="products-list">
           {data.userProducts.map((product) => (
-            <div key={`all_products_${product.id}`} className="product-item">
+            <div
+              key={`all_products_${product.id}`}
+              className="product-item"
+              onClick={() => navigate(`/product-edit/${product.id}`)}
+            >
               <div className="product-heading-group">
                 <h2>{product.title}</h2>
                 <DeleteButton
-                  onClick={() => handleDeleteButtonClick(product.id)}
+                  onClick={(event) =>
+                    handleDeleteButtonClick(event, product.id)
+                  }
                 />
               </div>
               <div className="product-categories-container">
@@ -81,7 +84,7 @@ const MyProducts = () => {
                 </span>
                 <span
                   className="link"
-                  onClick={() => navigate(`/product-details/${product.id}`)}
+                  onClick={() => navigate(`/product-edit/${product.id}`)}
                 >
                   ... More details
                 </span>
@@ -101,10 +104,11 @@ const MyProducts = () => {
         </div>
       )}
 
-      <ConfirmProductDeleteModal
+      <WarningModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         onConfirm={handleProductDelete}
+        warningTitle={'Are you sure you want to delete this product?'}
       />
     </div>
   );

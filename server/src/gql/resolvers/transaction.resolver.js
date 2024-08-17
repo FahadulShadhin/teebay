@@ -28,8 +28,12 @@ const transactionResolver = {
           rentStartDate,
           rentEndDate,
         },
+        include: {
+          fromUser: true,
+          toUser: true,
+          product: true,
+        },
       });
-
       return newTransaction;
     } catch (error) {
       console.log('Error while creating transaction', error);

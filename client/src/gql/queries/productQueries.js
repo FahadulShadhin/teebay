@@ -32,3 +32,22 @@ export const GET_MY_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_PRODUCT_DETAILS = gql`
+  query GetProductDetails($id: Int!) {
+    product(id: $id) {
+      id
+      title
+      description
+      categories
+      purchasePrice
+      rentPrice
+      rentPriceType
+      user {
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`;

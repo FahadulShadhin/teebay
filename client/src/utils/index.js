@@ -4,8 +4,8 @@ export const truncateProductDescription = (description, maxLength) => {
   return description;
 };
 
-export const formatProductCategory = (str) => {
-  return str
+export const formatProductCategory = (category) => {
+  return category
     .replace(/_/g, ' ')
     .toLowerCase()
     .split(' ')
@@ -34,6 +34,16 @@ export const formatDateTime = (timestamp) => {
   };
 
   return `${day}${getOrdinalSuffix(day)} ${month}, ${year}`;
+};
+
+export const formatRentDateTimeFormData = (dateStr) => {
+  let date = new Date(dateStr);
+
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date string');
+  }
+  console.log(date.toISOString());
+  return date.toISOString();
 };
 
 export const formatProductCategoryFormData = (categories) => {

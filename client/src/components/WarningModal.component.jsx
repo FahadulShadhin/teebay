@@ -2,13 +2,11 @@ import './assets/productComponent.style.css';
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import { CustomButton, WarningButton } from './CustomUIComponents';
 
-const ConfirmProductDeleteModal = ({ open, onClose, onConfirm }) => {
+const WarningModal = ({ open, onClose, onConfirm, warningTitle }) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogContent>
-        <h4 className="warning-title">
-          Are you sure you want to delete this product?
-        </h4>
+        <h4 className="warning-title">{warningTitle}</h4>
       </DialogContent>
       <DialogActions sx={{ p: 2 }}>
         <WarningButton
@@ -33,4 +31,4 @@ const ConfirmProductDeleteModal = ({ open, onClose, onConfirm }) => {
   );
 };
 
-export default ConfirmProductDeleteModal;
+export default WarningModal;
