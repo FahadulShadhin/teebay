@@ -15,7 +15,10 @@ import {
 } from '@mui/material';
 import { CustomButton } from '../components/CustomUIComponents';
 import { CREATE_PRODUCT } from '../gql/mutations/productMutations';
-import { formatProductCategoryFormData, formatRentTypeFormData } from '../utils';
+import {
+  formatProductCategoryFormData,
+  formatRentTypeFormData,
+} from '../utils';
 
 const categories = [
   'Electronics',
@@ -64,12 +67,12 @@ const CreateProduct = () => {
           description: data.description,
           purchasePrice: parseFloat(data.price),
           rentPrice: parseFloat(data.rentPrice),
-          rentPriceType: formatRentTypeFormData(data.rentType)
+          rentPriceType: formatRentTypeFormData(data.rentType),
         },
       });
       console.table(response.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
     navigate('/home');
@@ -353,7 +356,11 @@ const CreateProduct = () => {
                 color="primary"
                 sx={{ ml: 2 }}
               >
-                {loading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
+                {loading ? (
+                  <CircularProgress size={24} color="inherit" />
+                ) : (
+                  'Submit'
+                )}
               </CustomButton>
             </div>
           </form>
