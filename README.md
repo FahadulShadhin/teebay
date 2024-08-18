@@ -6,13 +6,13 @@
 - `cd` to the root directory (where the `compose.yaml` file lives)
 - Run:
 
-```cmd
+```bash
 docker compose up -d
 ```
 
 - Run initial db migration:
 
-```cmd
+```bash
 docker exec -it server npx prisma migrate dev --name init
 ```
 
