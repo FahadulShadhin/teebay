@@ -5,6 +5,7 @@ import Index from './pages/Index.page';
 import ProductDetails from './pages/ProductDetails.page';
 import EditProduct from './pages/EditProduct.page';
 import CreateProduct from './pages/CreateProduct.page';
+import Transactions from './pages/Transactions.page';
 import { ApolloProvider } from '@apollo/client';
 import ProtectedRoute from './components/HOC/ProtectedRoute.component';
 import { client } from './gql/apolloClient';
@@ -21,6 +22,7 @@ function App() {
               <Route path="/product-details/:id" element={<ProductDetails />} />
               <Route path="/product-edit/:id" element={<EditProduct />} />
               <Route path="/create-product" element={<CreateProduct />} />
+              <Route path="/transactions" element={<Transactions />} />
             </Route>
           </Routes>
         </Router>

@@ -11,3 +11,25 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const GET_MY_TRANSACTIONS = gql`
+  query GetMyTransactions {
+    userTransactions {
+      type
+      fromUser {
+        id
+      }
+      toUser {
+        id
+      }
+      product {
+        id
+        title
+        categories
+        purchasePrice
+        description
+        createdAt
+      }
+    }
+  }
+`;

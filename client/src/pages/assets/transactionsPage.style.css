@@ -1,0 +1,27 @@
+.transactions-page-links-container {
+  background: whitesmoke;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  border-bottom: 3px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.button-wrapper.active-tab {
+  border-bottom: 3px solid #6559f4;
+}
+
+.transactions-content {
+  margin: auto;
+  padding-top: 2rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

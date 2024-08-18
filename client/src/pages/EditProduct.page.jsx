@@ -45,7 +45,7 @@ const EditProduct = () => {
       rentType: '',
     },
   });
-  const {isDirty} = formState;
+  const { isDirty } = formState;
   const {
     data: productData,
     loading: productLoading,

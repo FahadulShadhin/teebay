@@ -1,11 +1,13 @@
 import './assets/indexPage.style.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logout from '../components/Logout.component';
 import { Button } from '@mui/material';
 import AllProducts from '../components/AllProducts.component';
 import MyProducts from '../components/MyProducts.component';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [isAllProducts, setIsAllProducts] = useState(() => {
     const savedState = localStorage.getItem('isAllProducts');
     return savedState !== null ? JSON.parse(savedState) : true;
@@ -35,7 +37,17 @@ const Index = () => {
           >
             My Products
           </Button>
+
+          <Button
+            className="button"
+            variant="outlined"
+            color="secondary"
+            onClick={() => navigate('/transactions')}
+          >
+            Transactions
+          </Button>
         </div>
+
         <Logout />
       </div>
       <div>{isAllProducts ? <AllProducts /> : <MyProducts />}</div>
