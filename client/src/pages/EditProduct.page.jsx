@@ -1,4 +1,5 @@
 import './assets/productPage.style.css';
+import cross from '../assets/cross.svg';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
@@ -34,7 +35,7 @@ const rentTypes = ['per day', 'per week', 'per month'];
 const EditProduct = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset, formState } = useForm({
     defaultValues: {
       title: '',
       categories: [],
@@ -44,6 +45,7 @@ const EditProduct = () => {
       rentType: '',
     },
   });
+  const {isDirty} = formState;
   const {
     data: productData,
     loading: productLoading,
@@ -60,7 +62,6 @@ const EditProduct = () => {
       const formattedProductData = productData.product.categories.map(
         (product) => formatProductCategory(product)
       );
-      console.log(formattedProductData);
       reset({
         title: productData.product.title,
         categories: formattedProductData,
@@ -95,6 +96,7 @@ const EditProduct = () => {
     <div className="outer-container">
       <div className="form-container edit-product-form-container">
         <form onSubmit={handleSubmit(onSubmit)} className="single-stage-form">
+          <img src={cross} alt="Icon Button" className="close-page-icon" onClick={() => navigate('/home')} />
           <h3 className="subtitle">Title</h3>
           <Controller
             name="title"
@@ -213,6 +215,7 @@ const EditProduct = () => {
               type="submit"
               variant="contained"
               color="primary"
+              disabled={!isDirty}
             >
               {loading ? (
                 <CircularProgress size={24} color="inherit" />
