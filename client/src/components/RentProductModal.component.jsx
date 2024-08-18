@@ -64,8 +64,8 @@ const RentProductModal = ({ open, onClose, onConfirm, productId }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} sx={{ overflow: 'visible' }}>
-      <DialogContent sx={{ overflow: 'visible' }}>
+    <Dialog open={open} onClose={onClose}>
+      <DialogContent sx={{ overflow: 'visible', height:440 }}>
         <h4 className="warning-title">Rental period</h4>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="datepicker-outer-container">
