@@ -114,14 +114,3 @@ form {
   margin-top: 2rem;
   align-self: flex-end;
 }
-
-.close-page-icon {
-  align-self: flex-end;
-  width: 1rem;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.close-page-icon:hover {
-  transform: scale(1.3);
-}

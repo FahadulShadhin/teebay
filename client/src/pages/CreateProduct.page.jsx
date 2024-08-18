@@ -19,6 +19,7 @@ import {
   formatProductCategoryFormData,
   formatRentTypeFormData,
 } from '../utils';
+import Cross from '../components/Cross.component';
 
 const categories = [
   'Electronics',
@@ -88,6 +89,7 @@ const CreateProduct = () => {
               onNext();
             }}
           >
+            <Cross />
             <h2 className="title multistage-form-title">
               Select a title for your product
             </h2>
@@ -122,6 +124,7 @@ const CreateProduct = () => {
               onNext();
             }}
           >
+            <Cross />
             <h2 className="title multistage-form-title">Select Categories</h2>
             <Controller
               rules={{ required: true }}
@@ -190,6 +193,7 @@ const CreateProduct = () => {
               onNext();
             }}
           >
+            <Cross />
             <h2 className="title multistage-form-title">Select Description</h2>
             <Controller
               rules={{ required: true }}
@@ -235,6 +239,7 @@ const CreateProduct = () => {
               onNext();
             }}
           >
+            <Cross />
             <h2 className="title multistage-form-title">Select Price</h2>
             <Controller
               rules={{ required: true }}
@@ -314,6 +319,7 @@ const CreateProduct = () => {
 
         {stage === 5 && (
           <form onSubmit={handleSubmit(onSubmit)} className="multistage-form">
+            <Cross />
             <h2 className="title multistage-form-title summary-title">
               Summary
             </h2>

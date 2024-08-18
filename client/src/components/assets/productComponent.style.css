@@ -77,3 +77,14 @@
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper {
   overflow: visible !important;
 }
+
+.close-page-icon {
+  align-self: flex-end;
+  width: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.close-page-icon:hover {
+  transform: scale(1.3);
+}

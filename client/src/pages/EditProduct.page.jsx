@@ -1,5 +1,4 @@
 import './assets/productPage.style.css';
-import cross from '../assets/cross.svg';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
@@ -21,6 +20,7 @@ import {
   formatProductCategory,
   formatRentType,
 } from '../utils';
+import Cross from '../components/Cross.component';
 
 const categories = [
   'Electronics',
@@ -96,7 +96,7 @@ const EditProduct = () => {
     <div className="outer-container">
       <div className="form-container edit-product-form-container">
         <form onSubmit={handleSubmit(onSubmit)} className="single-stage-form">
-          <img src={cross} alt="Icon Button" className="close-page-icon" onClick={() => navigate('/home')} />
+          <Cross />
           <h3 className="subtitle">Title</h3>
           <Controller
             name="title"
