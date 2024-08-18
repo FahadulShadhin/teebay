@@ -1,6 +1,8 @@
-import { Button } from '@mui/material';
 import './assets/transactionsPage.style.css';
+import cross from '../assets/cross.svg';
+import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_MY_TRANSACTIONS } from '../gql/queries/userQueries';
 import ProductCard from '../components/ProductCard.component';
@@ -46,6 +48,7 @@ const Lent = ({ lentProducts }) => {
 };
 
 const Transactions = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab') ? localStorage.getItem('activeTab') : 'bought');
   const [boughtProducts, setBoughtProducts] = useState([]);
   const [soldProducts, setSoldProducts] = useState([]);
@@ -187,6 +190,14 @@ const Transactions = () => {
             Lent
           </Button>
         </div>
+
+        <img
+          src={cross}
+          alt="Icon Button"
+          className="close-page-icon"
+          onClick={() => navigate('/home')}
+          style={{ margin: '1rem 2rem', width: '1.5rem' }}
+        />
       </div>
 
       <div className="transactions-content">{renderComponent()}</div>

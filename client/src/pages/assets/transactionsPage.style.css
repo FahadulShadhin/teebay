@@ -19,6 +19,7 @@
 .transactions-content {
   margin: auto;
   padding-top: 2rem;
+  padding-bottom: 2rem;
   width: 50%;
   display: flex;
   flex-direction: column;
