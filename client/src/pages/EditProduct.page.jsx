@@ -24,8 +24,8 @@ import {
 const categories = [
   'Electronics',
   'Furniture',
-  'Home appliances',
-  'Sporting goods',
+  'Home Appliances',
+  'Sporting Goods',
   'Outdoor',
   'Toys',
 ];
@@ -34,11 +34,7 @@ const rentTypes = ['per day', 'per week', 'per month'];
 const EditProduct = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const {
-    control,
-    handleSubmit,
-    reset,
-  } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     defaultValues: {
       title: '',
       categories: [],
@@ -51,12 +47,12 @@ const EditProduct = () => {
   const {
     data: productData,
     loading: productLoading,
-    error: productError
+    error: productError,
   } = useQuery(GET_PRODUCT_DETAILS, {
     variables: { id: parseInt(id) },
   });
   const [createProduct, { loading, error }] = useMutation(UPDATE_PRODUCT, {
-    variables: { id: parseInt(id) }, 
+    variables: { id: parseInt(id) },
   });
 
   useEffect(() => {
@@ -64,7 +60,7 @@ const EditProduct = () => {
       const formattedProductData = productData.product.categories.map(
         (product) => formatProductCategory(product)
       );
-      console.log(formattedProductData)
+      console.log(formattedProductData);
       reset({
         title: productData.product.title,
         categories: formattedProductData,
@@ -105,11 +101,7 @@ const EditProduct = () => {
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <TextField
-                variant="outlined"
-                fullWidth
-                {...field}
-              />
+              <TextField variant="outlined" fullWidth {...field} />
             )}
           />
 

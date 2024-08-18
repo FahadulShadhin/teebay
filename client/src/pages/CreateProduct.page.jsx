@@ -23,8 +23,8 @@ import {
 const categories = [
   'Electronics',
   'Furniture',
-  'Home appliances',
-  'Sporting goods',
+  'Home Appliances',
+  'Sporting Goods',
   'Outdoor',
   'Toys',
 ];
@@ -98,11 +98,7 @@ const CreateProduct = () => {
                 required: true,
               }}
               render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  {...field}
-                />
+                <TextField variant="outlined" fullWidth {...field} />
               )}
             />
             <div className="buttons-container-first">
@@ -246,7 +242,7 @@ const CreateProduct = () => {
               control={control}
               render={({ field }) => (
                 <TextField
-                  placeholder='Purchase price'
+                  placeholder="Purchase price"
                   type="number"
                   variant="outlined"
                   fullWidth
@@ -263,7 +259,7 @@ const CreateProduct = () => {
                 control={control}
                 render={({ field }) => (
                   <TextField
-                    placeholder='Rent price'
+                    placeholder="Rent price"
                     type="number"
                     variant="outlined"
                     fullWidth
