@@ -83,7 +83,6 @@ const EditProduct = () => {
           rentPrice: parseFloat(data.rentPrice),
           rentPriceType: formatRentTypeFormData(data.rentType),
         },
-        refetchQueries: [{ query: GET_PRODUCT_DETAILS, variables: { id: parseInt(id) } }],
       });
       console.table(response.data);
     } catch (error) {
