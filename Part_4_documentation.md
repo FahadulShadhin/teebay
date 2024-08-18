@@ -70,3 +70,4 @@
   - Front end routes need to be more structured
   - Navigating with browsers back-forward buttons feels inconsistent (specially in bought-sold-borrowed-lent page)
   - A global navigation system is needed
+- More strict form validations could be added
