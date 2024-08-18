@@ -15,6 +15,7 @@ export const GET_USERS = gql`
 export const GET_MY_TRANSACTIONS = gql`
   query GetMyTransactions {
     userTransactions {
+      id
       type
       fromUser {
         id

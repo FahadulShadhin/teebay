@@ -9,7 +9,7 @@ const Bought = ({ boughtProducts }) => {
   return (
     <>
       {boughtProducts.map((transaction) => (
-        <ProductCard product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} />
       ))}
     </>
   );
@@ -19,7 +19,7 @@ const Sold = ({ soldProducts }) => {
   return (
     <>
       {soldProducts.map((transaction) => (
-        <ProductCard product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} />
       ))}
     </>
   );
@@ -29,7 +29,7 @@ const Borrowed = ({ borrowedProducts }) => {
   return (
     <>
       {borrowedProducts.map((transaction) => (
-        <ProductCard product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} />
       ))}
     </>
   );
@@ -39,7 +39,7 @@ const Lent = ({ lentProducts }) => {
   return (
     <>
       {lentProducts.map((transaction) => (
-        <ProductCard product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} />
       ))}
     </>
   );
