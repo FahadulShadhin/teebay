@@ -13,7 +13,7 @@
   - `fromUserId` represents the user who sold/lent a product (owner)
   - `toUserId` represents the user who bought/rented a product
   - `productId` represents the product being sold/lent
-  - `rentStartDate` and `rentEndDate` are **optional**. only for **RENT**
+  - `rentStartDate` and `rentEndDate` are only for **RENT**
 
 ## Folder Structure:
 
@@ -59,3 +59,14 @@
 - `src/gql/queries` has the GraphQL queries to fetch data
 - `src/gql/mutation` has the GraphQL mutation for modifying data (create/update/delete)
 - `src/utils` has the utility/helper functions
+
+## Areas to improve:
+
+- Didn't use **Apollo cache**
+  - Forgot to use apollo caching :/
+  - Need to re-think where and when caching can be implemented
+  - Need to reduce refetch
+- Navigation can be improved
+  - Front end routers need to be more structured
+  - Navigating with browsers back-forward buttons feels inconsistent (specially in bought-sold-borrowed-lent page)
+  - A global navigation system is needed
