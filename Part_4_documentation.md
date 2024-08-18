@@ -67,6 +67,6 @@
   - Need to re-think where and when caching can be implemented
   - Need to reduce refetch
 - Navigation can be improved
-  - Front end routers need to be more structured
+  - Front end routes need to be more structured
   - Navigating with browsers back-forward buttons feels inconsistent (specially in bought-sold-borrowed-lent page)
   - A global navigation system is needed
