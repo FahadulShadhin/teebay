@@ -21,7 +21,8 @@ const BuyProductModal = ({ open, onClose, warningTitle, productId }) => {
       });
       console.log(response);
       onClose();
-      navigate('/home');
+      localStorage.setItem('activeTab', 'bought');
+      navigate('/transactions');
     } catch (error) {
       console.log(error);
     }

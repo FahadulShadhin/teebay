@@ -8,7 +8,7 @@ import {
 
 const ProductCard = ({ product, path }) => {
   const navigate = useNavigate();
-  console.log(path)
+
   return (  
     <div
       className="product-item"

@@ -56,7 +56,8 @@ const RentProductModal = ({ open, onClose, onConfirm, productId }) => {
       console.log(response);
       onConfirm();
       onClose();
-      navigate('/home');
+      localStorage.setItem('activeTab', 'borrowed')
+      navigate('/transactions');
     } catch (error) {
       console.log(error);
     }
