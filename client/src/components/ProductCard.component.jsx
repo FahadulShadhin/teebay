@@ -6,13 +6,13 @@ import {
   truncateProductDescription,
 } from '../utils';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, path }) => {
   const navigate = useNavigate();
-
-  return (
+  console.log(path)
+  return (  
     <div
       className="product-item"
-      onClick={() => navigate(`/product-details/${product.id}`)}
+      onClick={() => navigate(`/${path}/${product.id}`)}
     >
       <h2>{product.title}</h2>
       <div className="product-categories-container">
@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
         </span>
         <span
           className="link"
-          onClick={() => navigate(`/product-details/${product.id}`)}
+          onClick={() => navigate(`/${path}/${product.id}`)}
         >
           ... More details
         </span>

@@ -24,7 +24,7 @@ const AllProducts = () => {
       ) : (
         <div className="products-list">
           {data.products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} path={'product-details'} />
           ))}
         </div>
       )}

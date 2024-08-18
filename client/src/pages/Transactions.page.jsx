@@ -9,7 +9,7 @@ const Bought = ({ boughtProducts }) => {
   return (
     <>
       {boughtProducts.map((transaction) => (
-        <ProductCard key={transaction.id} product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} path={'transaction-details'} />
       ))}
     </>
   );
@@ -19,7 +19,7 @@ const Sold = ({ soldProducts }) => {
   return (
     <>
       {soldProducts.map((transaction) => (
-        <ProductCard key={transaction.id} product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} path={'transaction-details'} />
       ))}
     </>
   );
@@ -29,7 +29,7 @@ const Borrowed = ({ borrowedProducts }) => {
   return (
     <>
       {borrowedProducts.map((transaction) => (
-        <ProductCard key={transaction.id} product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} path={'transaction-details'} />
       ))}
     </>
   );
@@ -39,14 +39,14 @@ const Lent = ({ lentProducts }) => {
   return (
     <>
       {lentProducts.map((transaction) => (
-        <ProductCard key={transaction.id} product={transaction.product} />
+        <ProductCard key={transaction.id} product={transaction.product} path={'transaction-details'} />
       ))}
     </>
   );
 };
 
 const Transactions = () => {
-  const [activeTab, setActiveTab] = useState('bought');
+  const [activeTab, setActiveTab] = useState(localStorage.getItem('activeTab') ? localStorage.getItem('activeTab') : 'bought');
   const [boughtProducts, setBoughtProducts] = useState([]);
   const [soldProducts, setSoldProducts] = useState([]);
   const [borrowedProducts, setBorrowedProducts] = useState([]);
@@ -55,6 +55,10 @@ const Transactions = () => {
   const { loading, error, data } = useQuery(GET_MY_TRANSACTIONS, {
     fetchPolicy: 'network-only',
   });
+
+  useEffect(() => {
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
 
   useEffect(() => {
     if (data) {
