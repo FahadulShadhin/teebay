@@ -53,9 +53,7 @@ const EditProduct = () => {
   } = useQuery(GET_PRODUCT_DETAILS, {
     variables: { id: parseInt(id) },
   });
-  const [createProduct, { loading, error }] = useMutation(UPDATE_PRODUCT, {
-    variables: { id: parseInt(id) },
-  });
+  const [updateProduct, { loading, error }] = useMutation(UPDATE_PRODUCT);
 
   useEffect(() => {
     if (productData) {
@@ -75,8 +73,9 @@ const EditProduct = () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await createProduct({
+      const response = await updateProduct({
         variables: {
+          id: parseInt(id),
           title: data.title,
           categories: formatProductCategoryFormData(data.categories),
           description: data.description,
@@ -84,6 +83,7 @@ const EditProduct = () => {
           rentPrice: parseFloat(data.rentPrice),
           rentPriceType: formatRentTypeFormData(data.rentType),
         },
+        refetchQueries: [{ query: GET_PRODUCT_DETAILS, variables: { id: parseInt(id) } }],
       });
       console.table(response.data);
     } catch (error) {
@@ -217,7 +217,7 @@ const EditProduct = () => {
               color="primary"
               disabled={!isDirty}
             >
-              {loading ? (
+              {loading || productLoading ? (
                 <CircularProgress size={24} color="inherit" />
               ) : (
                 'Edit product'

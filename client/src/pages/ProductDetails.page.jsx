@@ -7,6 +7,7 @@ import { formatProductCategory } from '../utils';
 import { CustomButton } from '../components/CustomUIComponents';
 import RentProductModal from '../components/RentProductModal.component';
 import BuyProductModal from '../components/BuyProductModal.component';
+import Cross from '../components/Cross.component';
 
 const isOwnProduct = (userId) =>
   parseInt(localStorage.getItem('userId')) === userId;
@@ -17,6 +18,7 @@ const ProductDetails = () => {
   const [rentModalOpen, setrentModalOpen] = useState(false);
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAILS, {
     variables: { id: parseInt(id) },
+    fetchPolicy: 'network-only',
   });
 
   if (error) return <p>Something went wrong!</p>;
@@ -25,6 +27,7 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details-container">
+      <Cross />
       <h1 className="product-details-title">{data.product.title}</h1>
       <span className="product-owner">
         Owner: {data.product.user.firstName} {data.product.user.lastName}
