@@ -8,7 +8,7 @@ import {
   truncateProductDescription,
   formatDateTime,
 } from '../utils';
-import DeleteButton from './deleteButton.component';
+import DeleteButton from './DeleteButton.component';
 import { CustomButton } from './CustomUIComponents';
 import WarningModal from './WarningModal.component';
 import { useNavigate } from 'react-router-dom';
