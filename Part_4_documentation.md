@@ -57,7 +57,7 @@
 - `src/components` has smaller reusable components
 - `src/pages` has the pages where routing is applied
 - `src/gql/queries` has the GraphQL queries to fetch data
-- `src/gql/mutation` has the GraphQL mutation for modifying data (create/update/delete)
+- `src/gql/mutations` has the GraphQL mutation for modifying data (create/update/delete)
 - `src/utils` has the utility/helper functions
 
 ## Areas to improve:
