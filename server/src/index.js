@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { createHandler } = require('graphql-http/lib/use/express');
 const { ruruHTML } = require('ruru/server');
-require('dotenv').config({ path: './.env' });
 const schema = require('./gql/schema.js');
 const { root } = require('./gql/resolvers/index.js');
 const authMiddleware = require('./middlewares/auth.middleware.js');
