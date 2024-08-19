@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
+const { jwtSecret } = require('../../utils/variables.js');
+
 const prisma = new PrismaClient();
 
 const authResolver = {
@@ -33,7 +35,7 @@ const authResolver = {
 
       const token = jwt.sign(
         { userId: newUser.id, email: newUser.email },
-        process.env.JWT_SECRET
+        jwtSecret
       );
 
       return { token, user: newUser };
@@ -56,10 +58,7 @@ const authResolver = {
         throw new Error('Invalid password');
       }
 
-      const token = jwt.sign(
-        { userId: user.id, email: user.email },
-        process.env.JWT_SECRET
-      );
+      const token = jwt.sign({ userId: user.id, email: user.email }, jwtSecret);
 
       return { token, user };
     } catch (error) {

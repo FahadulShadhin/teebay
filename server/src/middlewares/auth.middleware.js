@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { jwtSecret } = require('../utils/variables.js');
 
 const authMiddleware = (authHeader) => {
   try {
@@ -8,7 +9,7 @@ const authMiddleware = (authHeader) => {
         throw new Error('Unauthorized request');
       }
 
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      const decodedToken = jwt.verify(token, jwtSecret);
       if (!decodedToken) {
         throw new Error('Invalid access token');
       }

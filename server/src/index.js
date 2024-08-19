@@ -6,8 +6,9 @@ require('dotenv').config({ path: './.env' });
 const schema = require('./gql/schema.js');
 const { root } = require('./gql/resolvers/index.js');
 const authMiddleware = require('./middlewares/auth.middleware.js');
+const { port } = require('./utils/variables.js');
 
-const PORT = process.env.PORT || 5000;
+const PORT = port || 5000;
 
 const app = express();
 
